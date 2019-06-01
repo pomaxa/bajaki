@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit KnowFrom{% endblock %}
+
+{% block body %}
+    <h1>Edit KnowFrom</h1>
+
+    {{ include('know_from/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('know_from_index') }}">back to list</a>
+
+    {{ include('know_from/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New KnowFrom{% endblock %}
+
+{% block body %}
+    <h1>Create new KnowFrom</h1>
+
+    {{ include('know_from/_form.html.twig') }}
+
+    <a href="{{ path('know_from_index') }}">back to list</a>
+{% endblock %}

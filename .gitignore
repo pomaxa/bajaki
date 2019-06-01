@@ -1,0 +1,14 @@
+.env
+.idea
+.env.local
+.env.local.php
+.env.*.local
+.env.*.local
+public/bundles/
+var/
+vendor/
+
+.phpunit
+/phpunit.xml
+
+/.web-server-pid

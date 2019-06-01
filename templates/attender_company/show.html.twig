@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AttenderCompany{% endblock %}
+
+{% block body %}
+    <h1>AttenderCompany</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ attender_company.id }}</td>
+            </tr>
+            <tr>
+                <th>CompanyName</th>
+                <td>{{ attender_company.companyName }}</td>
+            </tr>
+            <tr>
+                <th>CompanyNameCanonical</th>
+                <td>{{ attender_company.companyNameCanonical }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('attender_company_index') }}">back to list</a>
+
+    <a href="{{ path('attender_company_edit', {'id': attender_company.id}) }}">edit</a>
+
+    {{ include('attender_company/_delete_form.html.twig') }}
+{% endblock %}

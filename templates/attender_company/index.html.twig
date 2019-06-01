@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AttenderCompany index{% endblock %}
+
+{% block body %}
+    <h1>AttenderCompany index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CompanyName</th>
+                <th>CompanyNameCanonical</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for attender_company in attender_companies %}
+            <tr>
+                <td>{{ attender_company.id }}</td>
+                <td>{{ attender_company.companyName }}</td>
+                <td>{{ attender_company.companyNameCanonical }}</td>
+                <td>
+                    <a href="{{ path('attender_company_show', {'id': attender_company.id}) }}">show</a>
+                    <a href="{{ path('attender_company_edit', {'id': attender_company.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('attender_company_new') }}">Create new</a>
+{% endblock %}

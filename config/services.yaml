@@ -1,0 +1,98 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    admin.email_address:
+        class: App\Admin\EmailAddressAdmin
+        arguments: [~, App\Entity\EmailAddress, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: EmailAddress }
+        public: true
+
+    admin.phone_number:
+        class: App\Admin\PhoneNumberAdmin
+        arguments: [~, App\Entity\PhoneNumber, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: PhoneNumber }
+        public: true
+
+    admin.happening:
+        class: App\Admin\HappeningAdmin
+        arguments: [~, App\Entity\Happening, App\Controller\HappeningAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Happening }
+        public: true
+
+    admin.profile_links:
+        class: App\Admin\ProfileLinksAdmin
+        arguments: [~, App\Entity\ProfileLinks, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ProfileLinks }
+        public: true
+
+    admin.application_comments:
+        class: App\Admin\ApplicationCommentsAdmin
+        arguments: [~, App\Entity\ApplicationComments, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ApplicationComments }
+        public: true
+
+    admin.field_of_work:
+        class: App\Admin\FieldOfWorkAdmin
+        arguments: [~, App\Entity\FieldOfWork, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: FieldOfWork }
+        public: true
+
+    admin.know_from:
+        class: App\Admin\KnowFromAdmin
+        arguments: [~, App\Entity\KnowFrom, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: KnowFrom }
+        public: true
+
+    admin.attender_company:
+        class: App\Admin\AttenderCompanyAdmin
+        arguments: [~, App\Entity\AttenderCompany, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: AttenderCompany }
+        public: true
+
+    admin.application:
+        class: App\Admin\ApplicationAdmin
+        arguments: [~, App\Entity\Application, App\Controller\ApplicationAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Application }
+        public: true
+
+    admin.attender:
+        class: App\Admin\AttenderAdmin
+        arguments: [~, App\Entity\Attender, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Attender }
+        public: true

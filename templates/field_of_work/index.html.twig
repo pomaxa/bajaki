@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FieldOfWork index{% endblock %}
+
+{% block body %}
+    <h1>FieldOfWork index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for field_of_work in field_of_works %}
+            <tr>
+                <td>{{ field_of_work.id }}</td>
+                <td>{{ field_of_work.title }}</td>
+                <td>
+                    <a href="{{ path('field_of_work_show', {'id': field_of_work.id}) }}">show</a>
+                    <a href="{{ path('field_of_work_edit', {'id': field_of_work.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('field_of_work_new') }}">Create new</a>
+{% endblock %}

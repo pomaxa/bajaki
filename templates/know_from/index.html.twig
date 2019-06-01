@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KnowFrom index{% endblock %}
+
+{% block body %}
+    <h1>KnowFrom index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for know_from in know_froms %}
+            <tr>
+                <td>{{ know_from.id }}</td>
+                <td>{{ know_from.title }}</td>
+                <td>
+                    <a href="{{ path('know_from_show', {'id': know_from.id}) }}">show</a>
+                    <a href="{{ path('know_from_edit', {'id': know_from.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('know_from_new') }}">Create new</a>
+{% endblock %}

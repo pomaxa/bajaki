@@ -19,7 +19,7 @@ class Application
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Attender", inversedBy="motivation")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Attender", inversedBy="applications")
      */
     private $attender;
 

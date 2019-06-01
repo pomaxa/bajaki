@@ -27,72 +27,74 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    admin.email_address:
-        class: App\Admin\EmailAddressAdmin
-        arguments: [~, App\Entity\EmailAddress, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: EmailAddress }
-        public: true
-
-    admin.phone_number:
-        class: App\Admin\PhoneNumberAdmin
-        arguments: [~, App\Entity\PhoneNumber, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: PhoneNumber }
-        public: true
-
-    admin.happening:
-        class: App\Admin\HappeningAdmin
-        arguments: [~, App\Entity\Happening, App\Controller\HappeningAdminController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Happening }
-        public: true
-
-    admin.profile_links:
-        class: App\Admin\ProfileLinksAdmin
-        arguments: [~, App\Entity\ProfileLinks, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: ProfileLinks }
-        public: true
-
-    admin.application_comments:
-        class: App\Admin\ApplicationCommentsAdmin
-        arguments: [~, App\Entity\ApplicationComments, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: ApplicationComments }
-        public: true
-
-    admin.field_of_work:
-        class: App\Admin\FieldOfWorkAdmin
-        arguments: [~, App\Entity\FieldOfWork, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: FieldOfWork }
-        public: true
-
-    admin.know_from:
-        class: App\Admin\KnowFromAdmin
-        arguments: [~, App\Entity\KnowFrom, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: KnowFrom }
-        public: true
-
-    admin.attender_company:
-        class: App\Admin\AttenderCompanyAdmin
-        arguments: [~, App\Entity\AttenderCompany, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: AttenderCompany }
-        public: true
-
     admin.application:
         class: App\Admin\ApplicationAdmin
         arguments: [~, App\Entity\Application, App\Controller\ApplicationAdminController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Application }
+            - { name: sonata.admin, manager_type: orm, group: Processing, label: Application }
         public: true
 
     admin.attender:
         class: App\Admin\AttenderAdmin
         arguments: [~, App\Entity\Attender, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Attender }
+            - { name: sonata.admin, manager_type: orm, group: Attenders, label: Attender }
         public: true
+
+
+    admin.email_address:
+        class: App\Admin\EmailAddressAdmin
+        arguments: [~, App\Entity\EmailAddress, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Details, label: EmailAddress }
+        public: true
+
+    admin.phone_number:
+        class: App\Admin\PhoneNumberAdmin
+        arguments: [~, App\Entity\PhoneNumber, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Details, label: PhoneNumber }
+        public: true
+
+    admin.happening:
+        class: App\Admin\HappeningAdmin
+        arguments: [~, App\Entity\Happening, App\Controller\HappeningAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: System, label: Happening }
+        public: true
+
+    admin.profile_links:
+        class: App\Admin\ProfileLinksAdmin
+        arguments: [~, App\Entity\ProfileLinks, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Details, label: ProfileLinks }
+        public: true
+
+    admin.application_comments:
+        class: App\Admin\ApplicationCommentsAdmin
+        arguments: [~, App\Entity\ApplicationComments, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Processing, label: ApplicationComments }
+        public: true
+
+    admin.field_of_work:
+        class: App\Admin\FieldOfWorkAdmin
+        arguments: [~, App\Entity\FieldOfWork, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Details, label: FieldOfWork }
+        public: true
+
+    admin.know_from:
+        class: App\Admin\KnowFromAdmin
+        arguments: [~, App\Entity\KnowFrom, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Details, label: KnowFrom }
+        public: true
+
+    admin.attender_company:
+        class: App\Admin\AttenderCompanyAdmin
+        arguments: [~, App\Entity\AttenderCompany, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Details, label: AttenderCompany }
+        public: true
+

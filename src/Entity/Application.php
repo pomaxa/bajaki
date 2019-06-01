@@ -19,7 +19,7 @@ class Application
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Attender", inversedBy="applications")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Attender", inversedBy="applications")
      */
     private $attender;
 
@@ -68,13 +68,17 @@ class Application
      */
     private $approvedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Happening", inversedBy="applications")
+     */
+    private $happening;
+
     public const STATUS_NEW = 'new';
     public const STATUS_APPROVED = 'approved';
     public const STATUS_REJECTED = 'rejected';
 
     public function __construct()
     {
-        $this->attender = new ArrayCollection();
         $this->isPayed = false;
         $this->createdAt = new \DateTime;
     }
@@ -84,31 +88,18 @@ class Application
         return $this->id;
     }
 
-    /**
-     * @return Collection|Attender[]
-     */
-    public function getAttender(): Collection
+    public function getAttender(): ?Attender
     {
         return $this->attender;
     }
 
-    public function addAttender(Attender $attender): self
+    public function setAttender(?Attender $attender): self
     {
-        if (!$this->attender->contains($attender)) {
-            $this->attender[] = $attender;
-        }
+        $this->attender = $attender;
 
         return $this;
     }
 
-    public function removeAttender(Attender $attender): self
-    {
-        if ($this->attender->contains($attender)) {
-            $this->attender->removeElement($attender);
-        }
-
-        return $this;
-    }
 
     public function getDietaryRequirements(): ?string
     {
@@ -216,5 +207,25 @@ class Application
         $this->approvedAt = $approvedAt;
 
         return $this;
+    }
+
+    public function getHappening(): ?Happening
+    {
+        return $this->happening;
+    }
+
+    public function setHappening(?Happening $happening): self
+    {
+        $this->happening = $happening;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        if(null === $this->happening) {
+            return 'unbinded application';
+        }
+        return 'Application for '.$this->getHappening();
     }
 }

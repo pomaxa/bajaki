@@ -60,6 +60,7 @@ final class AttenderAdmin extends AbstractAdmin
     {
         $formMapper
 //            ->add('id')
+//            ->add('applications')
             ->add('firstName')
             ->add('lastName')
             ->add('middleNames')
@@ -105,6 +106,7 @@ final class AttenderAdmin extends AbstractAdmin
             ->add('languages')
             ->add('jobTitle')
             ->add('allowToShare')
+            ->add('applications')
             ;
     }
 }

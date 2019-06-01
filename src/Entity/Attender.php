@@ -94,7 +94,7 @@ class Attender
     private $allowToShare;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Application", mappedBy="attender")
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="attender")
      */
     private $applications;
 

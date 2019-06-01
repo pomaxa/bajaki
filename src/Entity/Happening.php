@@ -63,11 +63,17 @@ class Happening
      */
     private $attenders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="happening")
+     */
+    private $applications;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable;
         $this->updatedAt = new \DateTimeImmutable;
         $this->attenders = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
 
@@ -202,6 +208,54 @@ class Happening
 
     public function __toString()
     {
-        return $this->id ? 'ss' : 'unknown';
+        if(!$this->id) {
+            return 'New Happening';
+        }
+
+        $name = $this->getTitle() .' |';
+        if($this->isRegistrationOpen) {
+            $name.= ' open | ' ;
+        }
+
+        if( $this->getStartsAt() instanceof \DateTimeInterface
+        && $this->getEndsAt() instanceof \DateTimeInterface) {
+            $name .= sprintf("%s - %s",
+                $this->getStartsAt()->format('d/m/Y'),
+                $this->getEndsAt()->format('d/m/Y')
+            );
+        }
+
+        return $name;
+    }
+
+    /**
+     * @return Collection|Application[]
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setHappening($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->contains($application)) {
+            $this->applications->removeElement($application);
+            // set the owning side to null (unless already changed)
+            if ($application->getHappening() === $this) {
+                $application->setHappening(null);
+            }
+        }
+
+        return $this;
     }
 }

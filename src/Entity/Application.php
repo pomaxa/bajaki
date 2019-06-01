@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ApplicationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Application
 {
@@ -227,5 +228,13 @@ class Application
             return 'unbinded application';
         }
         return 'Application for '.$this->getHappening();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function trackUpdateAt(): void
+    {
+        $this->setUpdatedAt(new \DateTime());
     }
 }

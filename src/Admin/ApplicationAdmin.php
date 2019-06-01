@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Admin;
 
 use App\Entity\Application;
-use App\Entity\Attender;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -13,14 +12,14 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
-use Sonata\AdminBundle\Form\Type\ModelType;
-use Sonata\AdminBundle\Form\Type\ModelTypeList;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 final class ApplicationAdmin extends AbstractAdmin
 {
+    public $supportsPreviewMode = true;
+
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
@@ -76,6 +75,8 @@ final class ApplicationAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
+            ->add('happening', ModelListType::class)
+            /*
             ->add('happening', ModelAutocompleteType::class, [
                 'property' => 'title',
                 'callback' => function ($admin, $property, $value) {
@@ -86,8 +87,8 @@ final class ApplicationAdmin extends AbstractAdmin
                         ->setParameter('barValue', true);
                     $datagrid->setValue($property, null, $value);
                 },
-            ])
-            ->add('attender', AdminType::class)
+            ])*/
+            ->add('attender', ModelListType::class)
             ->add('dietaryRequirements')
             ->add('accommodation')
             ->add('accommodationComments')

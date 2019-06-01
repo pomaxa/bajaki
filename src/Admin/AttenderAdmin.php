@@ -51,7 +51,7 @@ final class AttenderAdmin extends AbstractAdmin
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => [],
+//                    'delete' => [],
                 ],
             ]);
     }

@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Intl\Intl;
@@ -87,6 +88,7 @@ final class AttenderAdmin extends AbstractAdmin
                     'Ukrainian' => 'Ukrainian'
                 ]
             ])
+            ->add('company', ModelListType::class)
             ->add('jobTitle')
             ->add('allowToShare')
             ;

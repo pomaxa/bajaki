@@ -109,6 +109,11 @@ class Attender
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\AttenderCompany", inversedBy="attenders")
+     */
+    private $company;
+
 
     public function __construct()
     {
@@ -414,5 +419,17 @@ class Attender
     public function trackUpdateAt(): void
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    public function getCompany(): ?AttenderCompany
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?AttenderCompany $company): self
+    {
+        $this->company = $company;
+
+        return $this;
     }
 }

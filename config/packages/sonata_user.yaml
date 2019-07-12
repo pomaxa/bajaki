@@ -1,0 +1,15 @@
+sonata_user:
+  class:                  # Entity Classes
+    user:             App\Entity\User
+    group:            App\Entity\UserGroup
+
+  admin:                  # Admin Classes
+    user:
+      class:          Sonata\UserBundle\Admin\Entity\UserAdmin
+      controller:     SonataAdminBundle:CRUD
+      translation:    SonataUserBundle
+
+    group:
+      class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
+      controller:     SonataAdminBundle:CRUD
+      translation:    SonataUserBundle

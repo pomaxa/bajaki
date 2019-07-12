@@ -98,3 +98,8 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Details, label: AttenderCompany }
         public: true
 
+
+    app.form.registration:
+        class: App\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <h1>Login</h1>
+
+    {{ form_start(loginForm) }}
+    {{ form_row(loginForm.email) }}
+    {{ form_row(loginForm.password) }}
+
+    <button class="btn">Login</button>
+    {{ form_end(loginForm) }}
+{% endblock %}

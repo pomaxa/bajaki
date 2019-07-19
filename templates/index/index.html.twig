@@ -9,9 +9,9 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello ! ✅</h1>
 
-    This friendly message is coming from:
+    List of open for registration events:
     <ul>
         {% for h in events %}
             <li><a href="{{ path('happening', {'id': h.id}) }}">{{ h.title }}</a> </li>

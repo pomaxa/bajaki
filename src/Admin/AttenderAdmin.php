@@ -101,6 +101,8 @@ final class AttenderAdmin extends AbstractAdmin
             ->add('firstName')
             ->add('lastName')
             ->add('middleNames')
+            ->add('phone')
+            ->add('email')
             ->add('gender')
             ->add('countryOfLiving')
             ->add('dateOfBirth')

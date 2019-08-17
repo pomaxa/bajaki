@@ -31,6 +31,24 @@ final class ApplicationAdminController extends CRUDController
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
 
+    public function markAsPaidAction($id)
+    {
+        /** @var Application $object */
+        $object = $this->admin->getSubject();
+
+        if (!$object) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
+        }
+        $object->setIsPayed(!$object->getIsPayed());
+        $object->setUpdatedAt(new \DateTime());
+
+        $this->getDoctrine()->getManager()->persist($object);
+        $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('sonata_flash_success', 'Payment status updated');
+
+        return new RedirectResponse($this->admin->generateUrl('list'));
+    }
+
     public function rejectAction($id)
     {
         /** @var Application $object */

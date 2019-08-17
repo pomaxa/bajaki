@@ -35,17 +35,17 @@ class Attender
     private $middleNames;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\EmailAddress", inversedBy="attenders")
+     * @ORM\ManyToMany(targetEntity="App\Entity\EmailAddress", inversedBy="attenders", cascade={"persist"})
      */
     private $email;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\PhoneNumber", inversedBy="attenders")
+     * @ORM\ManyToMany(targetEntity="App\Entity\PhoneNumber", inversedBy="attenders", cascade={"persist"} )
      */
     private $phone;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $gender;
 
@@ -197,6 +197,24 @@ class Attender
     public function getPhone(): Collection
     {
         return $this->phone;
+    }
+
+    public function setEmail($emails)
+    {
+        if($emails instanceof Collection) {
+            $this->email = $emails;
+        }elseif(is_string($emails)) {
+            $this->email[] = (new EmailAddress())->setEmail($emails);
+        }
+    }
+
+    public function setPhone($phones)
+    {
+        if($phones instanceof Collection) {
+            $this->phone = $phones;
+        }elseif(is_string($phones)){
+            $this->phone[] = (new PhoneNumber())->setPhone($phones);
+        }
     }
 
     public function addPhone(PhoneNumber $phone): self

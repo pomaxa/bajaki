@@ -26,7 +26,7 @@ class PhoneNumber
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $normolizedPhone;
+    private $normalizedPhone;
 
     /**
      * @ORM\Column(type="string", length=80)
@@ -56,18 +56,21 @@ class PhoneNumber
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+        $this->setNormalizedPhone($phone);
 
         return $this;
     }
 
-    public function getNormolizedPhone(): ?string
+    public function getNormalizedPhone(): ?string
     {
-        return $this->normolizedPhone;
+        return $this->normalizedPhone;
     }
 
-    public function setNormolizedPhone(string $normolizedPhone): self
+    public function setNormalizedPhone(string $normalizedPhone): self
     {
-        $this->normolizedPhone = $normolizedPhone;
+        $normalizedPhone = str_replace([' ', '+', '#', '(', ')'], '', $normalizedPhone);
+        $this->normalizedPhone  = $normalizedPhone;
+        $this->setHash(md5($normalizedPhone)); //todo: move to listener
 
         return $this;
     }
@@ -110,5 +113,10 @@ class PhoneNumber
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->phone;
     }
 }

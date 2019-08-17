@@ -127,4 +127,9 @@ class EmailAddress
         $hash = sha1($this->getEmailCanonical());
         $this->setHash($hash);
     }
+
+    public function __toString()
+    {
+        return $this->email;
+    }
 }

@@ -20,7 +20,7 @@ class Application
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Attender", inversedBy="applications")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Attender", inversedBy="applications", cascade={"persist"} )
      */
     private $attender;
 
@@ -81,6 +81,7 @@ class Application
     public function __construct()
     {
         $this->isPayed = false;
+        $this->applicationStatus = self::STATUS_NEW;
         $this->createdAt = new \DateTime;
     }
 

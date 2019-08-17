@@ -6,12 +6,14 @@ use App\Entity\Attender;
 
 use App\Entity\EmailAddress;
 use App\Entity\FieldOfWork;
+use App\Entity\PhoneNumber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\LanguageType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -40,7 +42,7 @@ class AttenderType extends AbstractType
             ->add('allowToShare')
             ->add('jobTitle')
             ->add('email', EmailType::class)
-            ->add('phone', EntityType::class, ['class' => EmailAddress::class])
+            ->add('phone', TextType::class)
             ->add('fieldOfWork', EntityType::class, ['class' => FieldOfWork::class])
             ->add('knowFrom')
         ;

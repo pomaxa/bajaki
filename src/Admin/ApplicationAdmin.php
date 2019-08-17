@@ -20,11 +20,20 @@ final class ApplicationAdmin extends AbstractAdmin
 {
     public $supportsPreviewMode = true;
 
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+        unset($actions['delete']);
+
+        return $actions;
+    }
+
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
             ->add('approve', $this->getRouterIdParameter().'/approve')
             ->add('reject', $this->getRouterIdParameter().'/reject')
+            ->add('mark_as_paid', $this->getRouterIdParameter().'/mark_as_paid')
         ;
     }
 
@@ -32,9 +41,8 @@ final class ApplicationAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id')
-            ->add('dietaryRequirements')
-            ->add('accommodation')
-            ->add('accommodationComments')
+            ->add('attender.countryOfLiving')
+
             ->add('applicationStatus')
             ->add('transportation')
             ->add('isPayed')
@@ -47,9 +55,9 @@ final class ApplicationAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('dietaryRequirements')
-            ->add('accommodation')
-            ->add('accommodationComments')
+            ->add('attender.countryOfLiving')
+            ->add('attender')
+
             ->add('applicationStatus')
             ->add('transportation')
             ->add('isPayed')
@@ -65,6 +73,9 @@ final class ApplicationAdmin extends AbstractAdmin
                     ],
                     'reject' => [
                         'template' => 'CRUD/list__action_reject.html.twig',
+                    ],
+                    'mark_as_paid' => [
+                        'template' => 'CRUD/list__action_mark_as_paid.html.twig',
                     ],
 
 //                    'delete' => [],
@@ -117,6 +128,8 @@ final class ApplicationAdmin extends AbstractAdmin
         $showMapper
             ->add('id')
             ->add('attender')
+            ->add('attender.phone')
+            ->add('attender.email')
             ->add('dietaryRequirements')
             ->add('accommodation')
             ->add('accommodationComments')

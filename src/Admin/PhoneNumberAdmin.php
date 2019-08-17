@@ -18,7 +18,7 @@ final class PhoneNumberAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('phone')
-            ->add('normolizedPhone')
+            ->add('normalizedPhone')
             ->add('hash')
             ;
     }
@@ -28,7 +28,7 @@ final class PhoneNumberAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('phone')
-            ->add('normolizedPhone')
+            ->add('normalizedPhone')
             ->add('hash')
             ->add('_action', null, [
                 'actions' => [
@@ -44,7 +44,7 @@ final class PhoneNumberAdmin extends AbstractAdmin
         $formMapper
 //            ->add('id')
             ->add('phone')
-//            ->add('normolizedPhone')
+//            ->add('normalizedPhone')
 //            ->add('hash')
             ;
     }
@@ -54,7 +54,7 @@ final class PhoneNumberAdmin extends AbstractAdmin
         $showMapper
             ->add('id')
             ->add('phone')
-            ->add('normolizedPhone')
+            ->add('normalizedPhone')
             ->add('hash')
             ;
     }

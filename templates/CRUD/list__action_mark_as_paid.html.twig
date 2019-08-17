@@ -1,0 +1,9 @@
+{% if object.getApplicationStatus() == 'approved' %}
+
+    {% if object.getIsPayed()%}
+        <a class="btn btn-sm btn-danger" href="{{ admin.generateObjectUrl('mark_as_paid', object) }}">refund</a>
+    {% else %}
+        <a class="btn btn-sm btn-success" href="{{ admin.generateObjectUrl('mark_as_paid', object) }}">set paid</a>
+    {% endif %}
+
+{% endif %}

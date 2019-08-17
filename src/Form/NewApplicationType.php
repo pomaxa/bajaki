@@ -14,9 +14,6 @@ class NewApplicationType extends AbstractType
         $builder
             ->add('happening')
 
-//            ->add('isPayed')
-//            ->add('attender')
-
 
             ->add('attender', AttenderType::class)
 

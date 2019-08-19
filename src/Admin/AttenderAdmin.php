@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Intl\Locale\Locale;
@@ -72,7 +73,7 @@ final class AttenderAdmin extends AbstractAdmin
                 'female' => 2,
             ]])
             ->add('countryOfLiving')
-            ->add('dateOfBirth')
+            ->add('dateOfBirth', BirthdayType::class, ['required' => false])
             ->add('facebookLink')
             ->add('languages', ChoiceType::class, [
                 'multiple' => true,

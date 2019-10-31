@@ -258,4 +258,24 @@ class Happening
 
         return $this;
     }
+
+
+    public function exportData()
+    {
+        return [
+            'title' => $this->getTitle(),
+            'id' => $this->getId(),
+            'starts_at' => $this->getStartsAt(),
+            'ends_at' => $this->getEndsAt(),
+            'description' => $this->getDescription(),
+            'is_registration_open' => $this->isRegistrationOpen(),
+            'is_paid' => $this->getIsPaid(),
+
+        ];
+    }
+
+    public function isRegistrationOpen(): bool
+    {
+        return (bool)$this->getIsRegistrationOpen();
+    }
 }

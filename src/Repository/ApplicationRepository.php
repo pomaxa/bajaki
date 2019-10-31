@@ -19,6 +19,28 @@ class ApplicationRepository extends ServiceEntityRepository
         parent::__construct($registry, Application::class);
     }
 
+    public function findByEvent($eventId)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.happening = :eventId')
+            ->setParameter('eventId', $eventId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findApprovedByEvent($eventId)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.happening = :eventId')
+            ->andWhere('a.status = :status')
+
+            ->setParameter('eventId', $eventId)
+            ->setParameter('status', Application::STATUS_APPROVED)
+            ->getQuery()
+            ->getResult();
+    }
+
+
     // /**
     //  * @return Application[] Returns an array of Application objects
     //  */

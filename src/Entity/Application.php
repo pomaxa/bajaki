@@ -238,4 +238,9 @@ class Application
     {
         $this->setUpdatedAt(new \DateTime());
     }
+
+    public function isPayed()
+    {
+        return (bool)$this->isPayed;
+    }
 }

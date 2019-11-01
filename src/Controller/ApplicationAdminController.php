@@ -39,7 +39,7 @@ final class ApplicationAdminController extends CRUDController
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
-        $object->setIsPayed(!$object->getIsPayed());
+        $object->setIsPayed(!$object->isPayed());
         $object->setUpdatedAt(new \DateTime());
 
         $this->getDoctrine()->getManager()->persist($object);

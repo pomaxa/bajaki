@@ -114,6 +114,10 @@ class Attender
      */
     private $company;
 
+    /**
+     * @ORM\Column(type="string", name="avatar_filename", nullable=true)
+     */
+    private $avatarFilename;
 
     public function __construct()
     {
@@ -448,6 +452,24 @@ class Attender
     {
         $this->company = $company;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatarFilename()
+    {
+        return $this->avatarFilename;
+    }
+
+    /**
+     * @param mixed $avatarFilename
+     * @return Attender
+     */
+    public function setAvatarFilename($avatarFilename)
+    {
+        $this->avatarFilename = $avatarFilename;
         return $this;
     }
 }

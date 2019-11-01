@@ -7,9 +7,12 @@ use App\Entity\Attender;
 use App\Entity\Happening;
 use App\Form\AttenderType;
 use App\Form\NewApplicationType;
+use App\Service\FileUploader;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,7 +21,7 @@ class HappeningController extends AbstractController
     /**
      * @Route("/happening/{id}", name="happening")
      */
-    public function index(Request $request, $id)
+    public function index(Request $request, $id, FileUploader $fileUploader)
     {
         $happening = $this->getDoctrine()->getRepository(Happening::class)->find($id);
         $application = new Application;
@@ -39,8 +42,16 @@ class HappeningController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
+            // but, the original `$application` variable has also been updated
+
             $application = $form->getData();
+
+            /** @var UploadedFile $avatarFile */
+            $avatarFile = $form['attender']['avatar']->getData();
+            if($avatarFile) {
+                $avatarFilename = $fileUploader->upload($avatarFile);
+                $application->getAttender()->setAvatarFilename($avatarFilename);
+            }
 
             $this->getDoctrine()->getManager()->persist($application);
             $this->getDoctrine()->getManager()->flush();

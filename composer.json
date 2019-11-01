@@ -27,7 +27,8 @@
     "symfony/validator": "4.2.*",
     "symfony/web-link": "4.2.*",
     "symfony/yaml": "4.2.*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-intl": "*"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",

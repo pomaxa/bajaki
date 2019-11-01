@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Attender;
 
+use Symfony\Component\Validator\Constraints\File;
 use App\Entity\EmailAddress;
 use App\Entity\FieldOfWork;
 use App\Entity\PhoneNumber;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,6 +33,22 @@ class AttenderType extends AbstractType
                     'Female' => 2,
                 ],]
                 )
+            ->add('avatar', FileType::class, [
+                'label' => 'Profile photo (optional)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '10M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/pjpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid photo or skip this step for now.',
+                    ])
+                ]
+            ])
             ->add('countryOfLiving')
             ->add('dateOfBirth', BirthdayType::class)
             ->add('facebookLink')

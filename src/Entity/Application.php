@@ -74,6 +74,11 @@ class Application
      */
     private $happening;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ApplicationComments", mappedBy="application", cascade={"persist"})
+     */
+    private $comments;
+
     public const STATUS_NEW = 'new';
     public const STATUS_APPROVED = 'approved';
     public const STATUS_REJECTED = 'rejected';
@@ -83,6 +88,7 @@ class Application
         $this->isPayed = false;
         $this->applicationStatus = self::STATUS_NEW;
         $this->createdAt = new \DateTime;
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -242,5 +248,36 @@ class Application
     public function isPayed()
     {
         return (bool)$this->isPayed;
+    }
+
+    /**
+     * @return Collection|ApplicationComments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(ApplicationComments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(ApplicationComments $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getApplication() === $this) {
+                $comment->setApplication(null);
+            }
+        }
+
+        return $this;
     }
 }

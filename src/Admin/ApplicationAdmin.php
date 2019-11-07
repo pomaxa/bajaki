@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Admin;
 
 use App\Entity\Application;
+use App\Form\ApplicationCommentType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\AdminType;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\CollectionType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -31,10 +31,9 @@ final class ApplicationAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
-            ->add('approve', $this->getRouterIdParameter().'/approve')
-            ->add('reject', $this->getRouterIdParameter().'/reject')
-            ->add('mark_as_paid', $this->getRouterIdParameter().'/mark_as_paid')
-        ;
+            ->add('approve', $this->getRouterIdParameter() . '/approve')
+            ->add('reject', $this->getRouterIdParameter() . '/reject')
+            ->add('mark_as_paid', $this->getRouterIdParameter() . '/mark_as_paid');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
@@ -42,7 +41,6 @@ final class ApplicationAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('attender.countryOfLiving')
-
             ->add('applicationStatus')
             ->add('transportation')
             ->add('isPayed')
@@ -57,7 +55,6 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('id')
             ->add('attender.countryOfLiving')
             ->add('attender')
-
             ->add('applicationStatus')
             ->add('transportation')
             ->add('isPayed')
@@ -77,8 +74,6 @@ final class ApplicationAdmin extends AbstractAdmin
                     'mark_as_paid' => [
                         'template' => 'CRUD/list__action_mark_as_paid.html.twig',
                     ],
-
-//                    'delete' => [],
                 ],
             ]);
     }
@@ -105,6 +100,18 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('accommodationComments')
             ->add('transportation')
             ->end()
+            ->with('Additional Comments')
+            ->add('comments', CollectionType::class, [
+                'by_reference' => false,
+                'allow_add' => true,
+                'required' => false,
+                'entry_type' => ApplicationCommentType::class
+            ], [
+                'label' => 'Application related comments',
+                'edit' => 'inline',
+                'inline' => 'table',
+            ])
+            ->end()
             ->with('Application Properties')
             ->add('isPayed')
             ->add('applicationStatus',
@@ -116,10 +123,7 @@ final class ApplicationAdmin extends AbstractAdmin
                 ]]
 
             )
-            ->end();
-//            ->add('createdAt')
-//            ->add('updatedAt')
-//            ->add('approvedAt')
+            ->end()
         ;
     }
 
@@ -138,6 +142,7 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('isPayed')
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('approvedAt');
+            ->add('approvedAt')
+            ->add('comments');
     }
 }

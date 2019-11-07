@@ -31,6 +31,17 @@ class ApplicationComments
      */
     private $createdBy;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="comments")
+     */
+    private $application;
+
+
+    public function __toString()
+    {
+        return $this->commentary;
+    }
+
     public function __construct()
     {
         $this->createdAt = new \DateTime;
@@ -74,6 +85,18 @@ class ApplicationComments
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getApplication(): ?Application
+    {
+        return $this->application;
+    }
+
+    public function setApplication(?Application $application): self
+    {
+        $this->application = $application;
 
         return $this;
     }

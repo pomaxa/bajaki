@@ -17,6 +17,7 @@ final class ApplicationCommentsAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id')
+            ->add('application')
             ->add('commentary')
             ->add('createdAt')
             ;
@@ -26,6 +27,7 @@ final class ApplicationCommentsAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
+            ->add('application')
             ->add('commentary')
             ->add('createdAt')
             ->add('_action', null, [
@@ -42,6 +44,7 @@ final class ApplicationCommentsAdmin extends AbstractAdmin
         $formMapper
 //            ->add('id')
             ->add('commentary')
+            ->add('application')
 //            ->add('createdAt')
             ;
     }

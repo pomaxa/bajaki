@@ -337,6 +337,9 @@
     "symfony/intl": {
         "version": "v4.2.9"
     },
+    "symfony/lock": {
+        "version": "v4.2.11"
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {

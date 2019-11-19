@@ -9,15 +9,27 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello ! ✅</h1>
+    <h1>Baltic Jewish Network</h1>
 
-    List of open for registration events:
-    <ul>
+    <h3>Open for registration events:</h3>
+
+
         {% for h in events %}
-            <li><a href="{{ path('happening', {'id': h.id}) }}">{{ h.title }}</a> </li>
+
+            <div class="card" style="width: 18rem;">
+                <img
+                        class="card-img-top"
+                        src="https://picsum.photos/200/100"
+                        alt="{{ h.title }}"
+                >
+                <div class="card-body">
+                    <h5 class="card-title">{{ h.title }}</h5>
+                    <p class="card-text">{{ h.description }}</p>
+
+                    <a href="{{ path('happening', {'id': h.id}) }}" class="btn btn-primary">Apply</a>
+                </div>
+            </div>
+
         {% endfor %}
-{#        <li>Your controller at <code><a href="{{ '/home/pomaxa/PhpstormProjects/event-registration-platform/src/Controller/IndexController.php'|file_link(0) }}">src/Controller/IndexController.php</a></code></li>#}
-{#        <li>Your template at <code><a href="{{ '/home/pomaxa/PhpstormProjects/event-registration-platform/templates/index/index.html.twig'|file_link(0) }}">templates/index/index.html.twig</a></code></li>#}
-    </ul>
 </div>
 {% endblock %}

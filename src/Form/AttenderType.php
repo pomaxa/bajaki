@@ -48,7 +48,9 @@ class AttenderType extends AbstractType
             ->add('countryOfLiving')
             ->add('dateOfBirth', BirthdayType::class)
             ->add('facebookLink')
-            ->add('languages', ChoiceType::class, ['multiple' =>true, 'choices' => [
+            ->add('languages', ChoiceType::class, ['multiple' =>true,
+            'attr' => ['class'=>'selectpicker', 'multiple'],
+            'choices' => [
                 'English' => 'English',
                 'Latvian' => 'Latvian',
                 'Russian' => 'Russian',

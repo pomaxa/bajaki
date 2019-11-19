@@ -145,6 +145,11 @@ class Attender
         return $this;
     }
 
+    public function getFullName(): string
+    {
+        return $this->getFirstName() .' ' . $this->getLastName();
+    }
+
     public function getLastName(): ?string
     {
         return $this->lastName;

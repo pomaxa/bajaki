@@ -1,7 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello HappeningController!{% endblock %}
+{% block head %}
 
+
+    <!-- Latest compiled and minified JavaScript -->
+{#    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>#}
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+{#    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-en.min.js"></script>#}
+
+    <script>
+        $(function () {
+            $('select').select2();;
+        });
+    </script>
+{% endblock head %}
 {% block body %}
     <style>
         .example-wrapper {
@@ -24,10 +37,38 @@
             <div class="col-md-4 col-lg-8">
                 <h3>Already apply</h3>
                 {% for attender in attenders %}
-                    <div>
-                        {{ attender.id }}
 
+                    <div class="card" style="width: 18rem; margin-bottom: 20px">
+                        <img
+                                class="card-img-top"
+                                src="/uploads/avatars/{{ attender.avatarFilename }}"
+                                alt="{{ attender.getFullName() }}"
+                        >
+                        <div class="card-body">
+                            <h5 class="card-title">{{ attender.getFullName() }}</h5>
+                            <p class="card-text">
+                                {{ attender.getFieldOfWork() }}<br>
+                                {{ attender.getJobTitle() }}<br>
+
+{#                                <span class="badge badge-secondary">#}
+{#                                    #}
+{#                                </span>#}
+                            </p>
+
+{#                            <a href="{{ path('happening', {'id': h.id}) }}" class="btn btn-primary">Apply</a>#}
+                        </div>
                     </div>
+
+
+
+{#                    <div>#}
+{#                        {{ attender.id }}#}
+
+
+{#                        {{ dump(attender.avatarFilename) }}#}
+{#                        {{ dump(attender) }}#}
+
+{#                    </div>#}
                 {% endfor %}
             </div>
         </div>

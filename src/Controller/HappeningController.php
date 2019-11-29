@@ -72,6 +72,14 @@ class HappeningController extends AbstractController
             if(!$attender instanceof Attender) {
                 continue;
             }
+
+            if(!$attender->getAllowToShare()) {
+                continue;
+            }
+            if($app->getApplicationStatus() !== Application::STATUS_APPROVED) {
+                continue;
+            }
+
             $attenders[$attender->getId()] = $attender;
         }
 

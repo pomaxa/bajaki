@@ -110,7 +110,7 @@ class Attender
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\AttenderCompany", inversedBy="attenders")
+     * @ORM\ManyToOne(targetEntity="App\Entity\AttenderCompany", inversedBy="attenders", cascade={"persist"})
      */
     private $company;
 

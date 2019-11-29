@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Attender;
+use App\Entity\AttenderCompany;
 use App\Entity\FieldOfWork;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -47,7 +49,7 @@ class AttenderType extends AbstractType
             ])
             ->add('countryOfLiving')
             ->add('dateOfBirth', BirthdayType::class)
-            ->add('facebookLink')
+            ->add('facebookLink', null, ['label' => 'Facebook profile'])
             ->add('languages', ChoiceType::class, ['multiple' =>true,
             'attr' => ['class'=>'selectpicker', 'multiple'],
             'choices' => [
@@ -57,10 +59,28 @@ class AttenderType extends AbstractType
             ]])
             ->add('allowToShare')
             ->add('jobTitle')
+            ->add('company', TextType::class, ['label'=> 'Company name'])
+
             ->add('email', EmailType::class)
-            ->add('phone', TextType::class)
+            ->add('phone', TextType::class, ['label' => 'Cell phone'])
             ->add('fieldOfWork', EntityType::class, ['class' => FieldOfWork::class])
-            ->add('knowFrom')
+            ->add('knowFrom', null, ['label' => 'How did you hear about Baltic Jewish Network'])
+        ;
+
+        $builder->get('company')
+            ->addModelTransformer(new CallbackTransformer(
+                function (AttenderCompany $company=null) {
+
+                    // transform the string back to an array
+                    return $company ? $company->getCompanyName() : '';
+                },
+                function ($tagsAsArray) {
+                    $company = new AttenderCompany();
+                    $company->setCompanyName($tagsAsArray);
+                    // transform the array to a string
+                    return $company;
+                }
+            ))
         ;
     }
 

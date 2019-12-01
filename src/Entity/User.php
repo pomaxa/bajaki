@@ -29,7 +29,9 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles = [
+        'ROLE_ADMIN'
+    ];
 
     /**
      * @var string The hashed password
@@ -41,6 +43,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\ApplicationComments", mappedBy="createdBy")
      */
     private $applicationComments;
+    private $plainPassword;
 
     public function __construct()
     {
@@ -106,6 +109,18 @@ class User implements UserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    public function setPlainPassword(string $password): self
+    {
+        $this->plainPassword = $password;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
     }
 
     /**

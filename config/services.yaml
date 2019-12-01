@@ -33,6 +33,10 @@ services:
         arguments:
             $targetDirectory: '%avatar_directory%'
 
+    App\EventListener\UserListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
 
     admin.application:
         class: App\Admin\ApplicationAdmin
@@ -105,3 +109,9 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Details, label: AttenderCompany }
         public: true
 
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: System, label: User }
+        public: true

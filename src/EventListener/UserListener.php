@@ -13,7 +13,7 @@ class UserListener
     /**
      * @var Argon2iPasswordEncoder
      */
-    private $passwordEncoder;
+    private $encoderFactory;
 
     public function __construct(EncoderFactoryInterface $encoderFactory)
     {

@@ -1,4 +1,8 @@
 doctrine:
+    dbal:
+        # configure these for your database server
+        driver: 'pdo_pgsql'
+        server_version: '11.5'
     orm:
         auto_generate_proxy_classes: false
         metadata_cache_driver:
@@ -10,7 +14,7 @@ doctrine:
         result_cache_driver:
             type: service
             id: doctrine.result_cache_provider
-
+#serverVersion
 services:
     doctrine.result_cache_provider:
         class: Symfony\Component\Cache\DoctrineProvider

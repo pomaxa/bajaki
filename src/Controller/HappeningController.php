@@ -34,6 +34,7 @@ class HappeningController extends AbstractController
         $application->setAttender(new Attender());
         $form = $this->createForm(NewApplicationType::class, $application);
         $form->add('save', SubmitType::class, [
+            'label' => 'Apply',
             'attr' => ['class' => 'btn-success'],
         ]);
 

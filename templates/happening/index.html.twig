@@ -36,7 +36,7 @@
             <div class="col-lg-8 col-md-8">{{ form(attendForm) }}</div>
             <div class="col-md-4 col-lg-8">
                 {% if attenders|length > 0 %}
-                <h3>Already apply</h3>
+                <h3>Known participants</h3>
                 {% endif %}
                 <div class="card-columns">
                 {% for attender in attenders %}

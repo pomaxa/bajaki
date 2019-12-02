@@ -23,7 +23,7 @@
 
         {% block head %}{% endblock head %}
     </head>
-    <body>
+    <body {% block bodystyle %}{% endblock bodystyle %}>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

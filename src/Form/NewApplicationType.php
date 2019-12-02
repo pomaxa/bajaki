@@ -14,7 +14,6 @@ class NewApplicationType extends AbstractType
         $builder
             ->add('happening')
 
-
             ->add('attender', AttenderType::class)
 
             ->add('dietaryRequirements')

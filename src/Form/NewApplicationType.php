@@ -20,7 +20,8 @@ class NewApplicationType extends AbstractType
             ->add('dietaryRequirements', null, ['label' => 'All of the offered food will be served in Kosher style. Please specify for any other dietary requirements'])
             ->add('accommodation', ChoiceType::class,
                 [
-                    'label' => 'Accomodation. Please select from the following list',
+                    'label' => 'Accommodation',
+                    'placeholder' => 'Please select from the following list',
                     'choices' => [
                         'Single' => 'Single',
                         'Shared' => 'Shared',

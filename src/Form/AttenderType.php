@@ -27,12 +27,14 @@ class AttenderType extends AbstractType
             ->add('email', EmailType::class)
             ->add('phone', TextType::class, ['label' => 'Cell phone'])
             ->add('gender', ChoiceType::class,
-                ['choices'  => [
-                    'Unknown' => null,
-                    'Male' => 1,
-                    'Female' => 2,
-                ],]
-                )
+                [
+                    'choices'  => [
+                        'Male' => 1,
+                        'Female' => 2,
+                    ],
+                    'placeholder' => 'Choose an option',
+                ]
+            )
             ->add('allowToShare', null, ['label' => 'Allow to share your data for our networking purposes'])
             ->add('avatar', FileType::class, [
                 'label' => 'Profile photo (optional)',
@@ -68,7 +70,11 @@ class AttenderType extends AbstractType
             ->add('company', TextType::class, ['label'=> 'Company name'])
 
 
-            ->add('fieldOfWork', EntityType::class, ['class' => FieldOfWork::class])
+            ->add('fieldOfWork', EntityType::class, [
+                    'placeholder' => '...',
+                'class' => FieldOfWork::class
+                ]
+            )
             ->add('knowFrom', null, ['label' => 'How did you hear about Baltic Jewish Network'])
         ;
 

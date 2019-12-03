@@ -24,6 +24,8 @@ class AttenderType extends AbstractType
         $builder
             ->add('firstName')
             ->add('lastName')
+            ->add('email', EmailType::class)
+            ->add('phone', TextType::class, ['label' => 'Cell phone'])
             ->add('gender', ChoiceType::class,
                 ['choices'  => [
                     'Unknown' => null,
@@ -31,6 +33,7 @@ class AttenderType extends AbstractType
                     'Female' => 2,
                 ],]
                 )
+            ->add('allowToShare', null, ['label' => 'Allow to share your data for our networking purposes'])
             ->add('avatar', FileType::class, [
                 'label' => 'Profile photo (optional)',
                 'mapped' => false,
@@ -54,15 +57,17 @@ class AttenderType extends AbstractType
             'attr' => ['class'=>'selectpicker', 'multiple'],
             'choices' => [
                 'English' => 'English',
+                'Estonian' => 'Estonian',
                 'Latvian' => 'Latvian',
+                'Lithuanian' => 'Lithuanian',
                 'Russian' => 'Russian',
+                'Spanish' => 'Spanish',
             ]])
-            ->add('allowToShare')
+
             ->add('jobTitle')
             ->add('company', TextType::class, ['label'=> 'Company name'])
 
-            ->add('email', EmailType::class)
-            ->add('phone', TextType::class, ['label' => 'Cell phone'])
+
             ->add('fieldOfWork', EntityType::class, ['class' => FieldOfWork::class])
             ->add('knowFrom', null, ['label' => 'How did you hear about Baltic Jewish Network'])
         ;

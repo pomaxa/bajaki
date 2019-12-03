@@ -126,6 +126,7 @@ class Attender
         $this->phone = new ArrayCollection();
         $this->profileLinks = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->dateOfBirth = new \DateTime('1964-01-01');
     }
 
     public function getId(): ?int

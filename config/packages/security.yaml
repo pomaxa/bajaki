@@ -9,8 +9,8 @@ security:
         backend_users:
             memory:
                 users:
-                    operator: { password: '%env(APP_PASSWORD)%', roles: ['ROLE_ADMIN'] }
-                    admin: { password: '%env(APP_PASSWORD)%', roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] }
+                    operator@bjn.eu: { password: '%env(APP_PASSWORD)%', roles: ['ROLE_ADMIN'] }
+                    admin@bjn.eu: { password: '%env(APP_PASSWORD)%', roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] }
 
 #        app_user_provider:
 #            entity:

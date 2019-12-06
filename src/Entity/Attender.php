@@ -119,6 +119,24 @@ class Attender
      */
     private $avatarFilename;
 
+    private $avatarFile;
+
+    /**
+     * @return mixed
+     */
+    public function getAvatarFile()
+    {
+        return $this->avatarFile;
+    }
+
+    /**
+     * @param mixed $avatarFile
+     */
+    public function setAvatarFile($avatarFile): void
+    {
+        $this->avatarFile = $avatarFile;
+    }
+
     public function __construct()
     {
         $this->createdAt = new \DateTime;

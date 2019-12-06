@@ -48,6 +48,8 @@ services:
     admin.attender:
         class: App\Admin\AttenderAdmin
         arguments: [~, App\Entity\Attender, ~]
+        calls:
+            - ["setFileUploader", ['@App\Service\FileUploader']]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Attenders, label: Attender }
         public: true

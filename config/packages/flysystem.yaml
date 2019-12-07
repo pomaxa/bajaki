@@ -1,0 +1,15 @@
+# Read the documentation at https://github.com/thephpleague/flysystem-bundle/blob/master/docs/1-getting-started.md
+flysystem:
+    storages:
+        default.storage:
+            adapter: 'local'
+            options:
+                directory: '%kernel.project_dir%/var/storage/default'
+
+        users.storage:
+            adapter: 'aws'
+            options:
+                client: 'aws_client_service' # The service ID of the Aws\S3\S3Client instance
+                bucket: 'bjn2020'
+                options:
+                    ACL: 'public-read'

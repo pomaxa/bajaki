@@ -20,11 +20,11 @@ class FileUploader
      */
     private $logger;
 
-    public function __construct(string $targetDirectory, FilesystemInterface $usersStorage, LoggerInterface $logger)
+    public function __construct(string $targetDirectory, FilesystemInterface $usersStorage/*, LoggerInterface $logger*/)
     {
         $this->targetDirectory = $targetDirectory;
         $this->usersStorage = $usersStorage;
-        $this->logger = $logger;
+//        $this->logger = $logger;
     }
 
     public function getFilesystem()
@@ -46,7 +46,7 @@ class FileUploader
             );
             fclose($stream);
         } catch (FileException $e) {
-            $this->logger->critical($e->getMessage());
+//            $this->logger->critical($e->getMessage());
             // ... handle exception if something happens during file upload
         }
 
@@ -57,4 +57,6 @@ class FileUploader
     {
         return $this->targetDirectory;
     }
+
+//    public function
 }

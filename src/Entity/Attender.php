@@ -193,6 +193,20 @@ class Attender
         return $this;
     }
 
+    public function getFirstEmail()
+    {
+        $emails = $this->getEmail();
+        foreach ($emails as  $email) {
+            $address = $email->getEmail();
+            if(!empty($address )) {
+                return $address;
+            }
+        }
+
+
+        return null;
+    }
+
     /**
      * @return Collection|EmailAddress[]
      */

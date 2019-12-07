@@ -19,7 +19,7 @@ class HappeningController extends AbstractController
     /**
      * @Route("/happening/{id}", name="happening")
      */
-    public function index(Request $request, $id, FileUploader $fileUploader)
+    public function index(Request $request, $id, FileUploader $fileUploader, \Swift_Mailer $mailer)
     {
         $happening = $this->getDoctrine()->getRepository(Happening::class)->find($id);
         if(!$happening instanceof Happening) {
@@ -91,6 +91,21 @@ class HappeningController extends AbstractController
             'event' => $this->getDoctrine()->getRepository(Happening::class)
                 ->find($id)
         ]);
+    }
+
+    protected function sendConfirmationEmail(\Swift_Mailer $mailer, Attender $attender)
+    {
+        $message = (new \Swift_Message('[BJN] Application status update'))
+            ->setFrom('info@balticjewishnetwork.eu')
+            ->setTo($attender->getFirstEmail())
+            ->setBody(
+                $this->renderView(
+                    'email/registration.html.twig',
+                    ['attender' => $attender]
+                )
+            )
+        ;
+        $mailer->send($message);
     }
 
     /**

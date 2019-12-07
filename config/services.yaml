@@ -42,7 +42,7 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDirectory: '%avatar_directory%'
-            $usersStorage: users.storage
+#            $usersStorage: users.storage
 
     App\EventListener\UserListener:
         tags:

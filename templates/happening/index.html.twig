@@ -72,6 +72,7 @@
                         <div class="card card-w75" >
                             {% if attender.avatarFilename|length > 3 %}
                             <img
+                                    onerror="$(this).hide();"
                                     class="card-img-top"
                                     src="https://bjn2020.s3.eu-central-1.amazonaws.com/{{ attender.avatarFilename }}"
                                     alt="{{ attender.getFullName() }}"

@@ -61,15 +61,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 col-md-8">{{ form(attendForm) }}</div>
-            <div class="col-md-4 col-lg-6">
+            <div class="col-md-6">{{ form(attendForm) }}</div>
+            <div class="col-md-6">
                 {% if attenders|length > 0 %}
                     <h3>Our network for upcoming event</h3>
                 {% endif %}
                 <div class="card-columns">
                     {% for attender in attenders %}
 
-                        <div class="card card-" >
+                        <div class="card card-w75" >
                             {% if attender.avatarFilename|length > 3 %}
                             <img
                                     class="card-img-top"

@@ -57,6 +57,8 @@ class HappeningController extends AbstractController
 
             $this->getDoctrine()->getManager()->persist($application);
             $this->getDoctrine()->getManager()->flush();
+
+            $this->sendConfirmationEmail($mailer, $application->getAttender());
             // ... perform some action, such as s aving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             // $entityManager = $this->getDoctrine()->getManager();

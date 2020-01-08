@@ -7,6 +7,7 @@ use App\Entity\User;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Encoder\Argon2iPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserListener
 {
@@ -14,10 +15,14 @@ class UserListener
      * @var Argon2iPasswordEncoder
      */
     private $encoderFactory;
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $passwordEncoder;
 
-    public function __construct(EncoderFactoryInterface $encoderFactory)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->encoderFactory = $encoderFactory;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function prePersist(LifecycleEventArgs $args)
@@ -27,8 +32,7 @@ class UserListener
         if ($entity instanceof User) {
             $plainPassword = $entity->getPlainPassword();
             if(!empty($plainPassword)) {
-                $encoder = $this->encoderFactory ->getEncoder($entity);
-                $password = $encoder->encodePassword($plainPassword, $entity->getId());
+                $password = $encoder = $this->passwordEncoder->encodePassword($entity, $plainPassword);
                 $entity->setPassword($password);
             }
         }
@@ -41,8 +45,7 @@ class UserListener
         if ($entity instanceof User) {
             $plainPassword = $entity->getPlainPassword();
             if(!empty($plainPassword)) {
-                $encoder = $this->encoderFactory ->getEncoder($entity);
-                $password = $encoder->encodePassword($plainPassword, $entity->getId());
+                $password = $encoder = $this->passwordEncoder->encodePassword($entity, $plainPassword);
                 $entity->setPassword($password);
             }
         }

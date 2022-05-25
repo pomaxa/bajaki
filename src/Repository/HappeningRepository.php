@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Happening;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\BooleanType;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Happening|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class HappeningRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Happening::class);
     }
@@ -24,7 +24,7 @@ class HappeningRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.isRegistrationOpen = :val')
-            ->setParameter('val', true, BooleanType::BOOLEAN)
+            ->setParameter('val', true)
             ->orderBy('h.startsAt', 'ASC')
             ->setMaxResults(10)
             ->getQuery()

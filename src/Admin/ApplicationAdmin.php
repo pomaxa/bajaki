@@ -13,6 +13,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\CollectionType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -20,15 +21,8 @@ final class ApplicationAdmin extends AbstractAdmin
 {
     public $supportsPreviewMode = true;
 
-    public function getBatchActions()
-    {
-        $actions = parent::getBatchActions();
-        unset($actions['delete']);
 
-        return $actions;
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection
             ->add('approve', $this->getRouterIdParameter() . '/approve')

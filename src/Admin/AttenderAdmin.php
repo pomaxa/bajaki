@@ -106,12 +106,12 @@ final class AttenderAdmin extends AbstractAdmin
             ->add('allowToShare');
     }
 
-    public function prePersist($image)
+    public function prePersist($image): void
     {
         $this->manageFileUpload($image);
     }
 
-    public function preUpdate($image)
+    public function preUpdate($image): void
     {
         $this->manageFileUpload($image);
     }

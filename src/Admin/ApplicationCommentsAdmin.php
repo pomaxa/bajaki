@@ -30,7 +30,7 @@ final class ApplicationCommentsAdmin extends AbstractAdmin
             ->add('application')
             ->add('commentary')
             ->add('createdAt')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],

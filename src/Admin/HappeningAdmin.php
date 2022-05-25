@@ -41,13 +41,14 @@ final class HappeningAdmin extends AbstractAdmin
             ->add('description')
             ->add('isRegistrationOpen')
             ->add('isPaid')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
                 ],
             ]);
+        ;
     }
 
     protected function configureFormFields(FormMapper $formMapper): void

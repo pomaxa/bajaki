@@ -28,7 +28,7 @@ final class ProfileLinksAdmin extends AbstractAdmin
             ->add('id')
             ->add('title')
             ->add('url')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],

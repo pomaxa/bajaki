@@ -60,7 +60,7 @@ final class AttenderAdmin extends AbstractAdmin
             ->add('languages')
             ->add('jobTitle')
             ->add('allowToShare')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],

@@ -34,7 +34,7 @@ final class UserAdmin extends AbstractAdmin
             ->add('email')
 //            ->add('roles')
 //            ->add('password')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],

@@ -30,7 +30,7 @@ final class PhoneNumberAdmin extends AbstractAdmin
             ->add('phone')
             ->add('normalizedPhone')
             ->add('hash')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],

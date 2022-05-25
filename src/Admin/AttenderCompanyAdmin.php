@@ -28,7 +28,7 @@ final class AttenderCompanyAdmin extends AbstractAdmin
             ->add('id')
             ->add('companyName')
 //            ->add('companyNameCanonical')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],

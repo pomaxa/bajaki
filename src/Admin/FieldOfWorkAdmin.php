@@ -26,7 +26,7 @@ final class FieldOfWorkAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('title')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],

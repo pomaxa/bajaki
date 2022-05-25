@@ -30,7 +30,7 @@ final class EmailAddressAdmin extends AbstractAdmin
             ->add('email')
             ->add('emailCanonical')
             ->add('hash')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],

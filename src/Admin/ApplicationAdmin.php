@@ -33,6 +33,7 @@ final class ApplicationAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id')
+            ->add('happening')
             ->add('attender.countryOfLiving')
             ->add('applicationStatus')
             ->add('transportation')
@@ -46,6 +47,7 @@ final class ApplicationAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
+            ->add('happening')
             ->add('attender.countryOfLiving')
             ->add('attender')
             ->add('applicationStatus')

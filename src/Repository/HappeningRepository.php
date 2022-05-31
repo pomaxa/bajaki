@@ -20,6 +20,14 @@ class HappeningRepository extends ServiceEntityRepository
         parent::__construct($registry, Happening::class);
     }
 
+    public function save(Happening $happening, $flush = true)
+    {
+        $this->_em->persist($happening);
+        if($flush) {
+            $this->_em->flush();
+        }
+    }
+
     public function getUpcomming($limit)
     {
         return $this->createQueryBuilder('h')

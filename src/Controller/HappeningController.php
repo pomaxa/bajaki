@@ -6,6 +6,7 @@ use App\Entity\Application;
 use App\Entity\Attender;
 use App\Entity\Happening;
 use App\Form\NewApplicationType;
+use App\Repository\HappeningRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,9 +20,9 @@ class HappeningController extends AbstractController
     /**
      * @Route("/happening/{id}", name="happening")
      */
-    public function index(Request $request, $id, FileUploader $fileUploader, \Swift_Mailer $mailer)
+    public function index(Request $request, $id, FileUploader $fileUploader, \Swift_Mailer $mailer, HappeningRepository $happeningRepository)
     {
-        $happening = $this->getDoctrine()->getRepository(Happening::class)->find($id);
+        $happening = $happeningRepository->find($id);
         if(!$happening instanceof Happening) {
             return new RedirectResponse('/');
         }
@@ -30,7 +31,6 @@ class HappeningController extends AbstractController
 
 
         //get current user:
-
         $application->setAttender(new Attender());
         $form = $this->createForm(NewApplicationType::class, $application);
         $form->add('save', SubmitType::class, [
@@ -55,8 +55,8 @@ class HappeningController extends AbstractController
                 $application->getAttender()->setAvatarFilename($avatarFilename);
             }
 
-            $this->getDoctrine()->getManager()->persist($application);
-            $this->getDoctrine()->getManager()->flush();
+            $happeningRepository->persist($application);
+            $happeningRepository->flush();
 
             $this->sendConfirmationEmail($mailer, $application->getAttender());
             // ... perform some action, such as s aving the task to the database
@@ -131,17 +131,18 @@ class HappeningController extends AbstractController
         return $this->render('happening/thankyou.html.twig', $data);
     }
 
-    public function apply($id)
+    public function apply($id, HappeningRepository $happeningRepository)
     {
-
-
         /** @var Happening $event */
-        $event = $this->getDoctrine()->getRepository(Happening::class)
-            ->find($id);
+        $event = $happeningRepository->find($id);
 
         $attenders = [];
         foreach ( $event->getApplications() as $application) {
-            $attenders[$application->getAttender()->getId()] = $application->getAttender();
+            $attender = $application->getAttender();
+            if ($attender instanceof Attender) {
+                continue;
+            }
+            $attenders[$attender->getId()] = $attender;
         }
         return $this->render('happening/index.html.twig', [
             'event' => $event,

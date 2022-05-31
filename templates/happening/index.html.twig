@@ -7,6 +7,18 @@
         $(function(){
             $('select').select2();
             $('form .form-group').first().hide(); // hack for bjn, to no display event  dropdown.
+
+
+            $('input[type="file"]').change(function(e){
+                let fileName = e.target.files[0].name;
+                $('.custom-file-label').html(fileName);
+            });
+            // $('#new_application_attender_avatar').on('change',function(){
+            //     //get the file name
+            //     var fileName = $(this).val();
+            //     //replace the "Choose a file" label
+            //     $(this).next('.custom-file-label').html(fileName);
+            // })
         });
     </script>
 
@@ -69,6 +81,8 @@
                 <div class="card-columns">
                     {% for attender in attenders %}
 
+                        {% if attender.allowToShare  %}
+
                         <div class="card card-w75" >
                             {% if attender.avatarFilename|length > 3 %}
                             <img
@@ -87,6 +101,7 @@
 
                             </div>
                         </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

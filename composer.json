@@ -1,7 +1,11 @@
 {
+  "name": "pomaxa/bajaki",
+  "description": "Event Registration platform",
   "type": "project",
-  "license": "proprietary",
-  "platform": {"php": "7.4"},
+  "license": "MIT",
+  "platform": {
+    "php": "7.4"
+  },
   "require": {
     "ext-ctype": "*",
     "ext-iconv": "*",

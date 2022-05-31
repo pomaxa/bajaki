@@ -55,7 +55,8 @@ class HappeningController extends AbstractController
                 $application->getAttender()->setAvatarFilename($avatarFilename);
             }
 
-            $happeningRepository->save($application);
+            $this->getDoctrine()->getManager()->persist($application);
+            $this->getDoctrine()->getManager()->flush();
 
             $this->sendConfirmationEmail($mailer, $application->getAttender());
             // ... perform some action, such as s aving the task to the database

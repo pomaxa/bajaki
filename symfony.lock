@@ -5,9 +5,6 @@
     "aws/aws-sdk-php": {
         "version": "3.128.0"
     },
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.5"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

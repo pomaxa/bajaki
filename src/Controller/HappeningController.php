@@ -6,6 +6,7 @@ use App\Entity\Application;
 use App\Entity\Attender;
 use App\Entity\Happening;
 use App\Form\NewApplicationType;
+use App\Repository\ApplicationRepository;
 use App\Repository\HappeningRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,10 +21,10 @@ class HappeningController extends AbstractController
     /**
      * @Route("/happening/{id}", name="happening")
      */
-    public function index(Request $request, $id, FileUploader $fileUploader, \Swift_Mailer $mailer, HappeningRepository $happeningRepository)
+    public function index(Request $request, $id, FileUploader $fileUploader, \Swift_Mailer $mailer, HappeningRepository $happeningRepository, ApplicationRepository $applicationRepository)
     {
         $happening = $happeningRepository->find($id);
-        if(!$happening instanceof Happening) {
+        if (!$happening instanceof Happening) {
             return new RedirectResponse('/');
         }
         $application = new Application;
@@ -55,31 +56,25 @@ class HappeningController extends AbstractController
                 $application->getAttender()->setAvatarFilename($avatarFilename);
             }
 
-            $this->getDoctrine()->getManager()->persist($application);
-            $this->getDoctrine()->getManager()->flush();
+            $applicationRepository->save($application);
 
             $this->sendConfirmationEmail($mailer, $application->getAttender());
-            // ... perform some action, such as s aving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($task);
-            // $entityManager->flush();
 
             return $this->redirectToRoute('happening_success');
         }
 
 
         $attenders = [];
-        foreach ( $happening->getApplications() as $app) {
+        foreach ($happening->getApplications() as $app) {
             $attender = $app->getAttender();
-            if(!$attender instanceof Attender) {
+            if (!$attender instanceof Attender) {
                 continue;
             }
 
-            if(!$attender->getAllowToShare()) {
+            if (!$attender->getAllowToShare()) {
                 continue;
             }
-            if($app->getApplicationStatus() !== Application::STATUS_APPROVED) {
+            if ($app->getApplicationStatus() !== Application::STATUS_APPROVED) {
                 continue;
             }
 
@@ -97,36 +92,39 @@ class HappeningController extends AbstractController
 
     protected function sendConfirmationEmail(\Swift_Mailer $mailer, Attender $attender)
     {
-        $message = (new \Swift_Message('[BJN] Application status update'))
-            ->setFrom('info@balticjewishnetwork.eu')
-            ->setTo($attender->getFirstEmail())
-            ->setBody(
-                $this->renderView(
-                    'email/registration.html.twig',
-                    ['attender' => $attender]
-                )
-            )
-        ;
-        $mailer->send($message);
+        try {
+            $message = (new \Swift_Message('[BJN] Application status update'))
+                ->setFrom('info@balticjewishnetwork.eu')
+                ->setTo($attender->getFirstEmail())
+                ->setBody(
+                    $this->renderView(
+                        'email/registration.html.twig',
+                        ['attender' => $attender]
+                    )
+                );
+            $mailer->send($message);
+        } catch (\Throwable $throwable) {
+            //this->log
+        }
     }
 
     /**
      * @Route("/lp/thankyou", name="happening_success")
      */
-    public function thankyou(Request $request)
+    public function thankyou(Request $request, HappeningRepository $happeningRepository)
     {
         $data = ['attenders'];
         $eventId = $request->get('id');
-        if($eventId) {
-            /** @var Happening $event */
-            $event = $this->getDoctrine()->getRepository(Happening::class);
-            foreach ( $event->getApplications() as $application) {
-                $data['attenders'][$application->getAttender()->getId()] = $application->getAttender();
+        $event = $happeningRepository->find($eventId);
+        if ($event) {
+            foreach ($event->getApplications() as $application) {
+                $attender = $application->getAttender();
+                if ($attender === null) {
+                    continue;
+                }
+                $data['attenders'][$attender->getId()] = $attender;
             }
-
-
         }
-
 
         return $this->render('happening/thankyou.html.twig', $data);
     }
@@ -137,7 +135,7 @@ class HappeningController extends AbstractController
         $event = $happeningRepository->find($id);
 
         $attenders = [];
-        foreach ( $event->getApplications() as $application) {
+        foreach ($event->getApplications() as $application) {
             $attender = $application->getAttender();
             if ($attender instanceof Attender) {
                 continue;

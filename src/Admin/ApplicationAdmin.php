@@ -7,6 +7,7 @@ namespace App\Admin;
 use App\Entity\Application;
 use App\Form\ApplicationCommentType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -20,6 +21,11 @@ final class ApplicationAdmin extends AbstractAdmin
 {
     public $supportsPreviewMode = true;
 
+    protected function configureDefaultSortValues(array &$sortValues): void
+    {
+        $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
+        $sortValues[DatagridInterface::SORT_BY] = 'id';
+    }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {

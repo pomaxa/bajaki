@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Happening;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Types\BooleanType;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -28,44 +27,15 @@ class HappeningRepository extends ServiceEntityRepository
         }
     }
 
-    public function getUpcomming($limit)
+    public function getUpcomming(int $limit = 10)
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.isRegistrationOpen = :val')
             ->setParameter('val', true)
             ->orderBy('h.startsAt', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
             ;
     }
-
-    // /**
-    //  * @return Happening[] Returns an array of Happening objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Happening
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -3,9 +3,6 @@
   "description": "Event Registration platform",
   "type": "project",
   "license": "MIT",
-  "platform": {
-    "php": "7.4"
-  },
   "require": {
     "ext-ctype": "*",
     "ext-iconv": "*",

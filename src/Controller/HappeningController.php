@@ -118,7 +118,7 @@ class HappeningController extends AbstractController
         $data = ['attenders'];
         try {
             $eventId = $request->get('id');
-            $event = $happeningRepository->find($eventId);
+            $event = $happeningRepository->findOneBy(['id' => $eventId]);
         } catch ( \Exception $exception) {}
 
         if ($event) {

@@ -23,7 +23,7 @@ class HappeningController extends AbstractController
      */
     public function index(Request $request, $id, FileUploader $fileUploader, \Swift_Mailer $mailer, HappeningRepository $happeningRepository, ApplicationRepository $applicationRepository)
     {
-        $happening = $happeningRepository->find($id);
+        $happening = $this->getDoctrine()->getRepository(Happening::class)->find($id);
         if (!$happening instanceof Happening) {
             return new RedirectResponse('/');
         }
@@ -56,6 +56,8 @@ class HappeningController extends AbstractController
                 $application->getAttender()->setAvatarFilename($avatarFilename);
             }
 
+            $this->getDoctrine()->getManager()->persist($application);
+            $this->getDoctrine()->getManager()->flush();
             $applicationRepository->save($application);
 
             $this->sendConfirmationEmail($mailer, $application->getAttender());
@@ -132,7 +134,9 @@ class HappeningController extends AbstractController
     public function apply($id, HappeningRepository $happeningRepository)
     {
         /** @var Happening $event */
-        $event = $happeningRepository->find($id);
+//        $event = $happeningRepository->find($id);
+        $event = $this->getDoctrine()->getRepository(Happening::class)
+            ->find($id);
 
         $attenders = [];
         foreach ($event->getApplications() as $application) {

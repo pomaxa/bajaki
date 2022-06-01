@@ -116,8 +116,11 @@ class HappeningController extends AbstractController
     public function thankyou(Request $request, HappeningRepository $happeningRepository)
     {
         $data = ['attenders'];
-        $eventId = $request->get('id');
-        $event = $happeningRepository->find($eventId);
+        try {
+            $eventId = $request->get('id');
+            $event = $happeningRepository->find($eventId);
+        } catch ( \Exception $exception) {}
+
         if ($event) {
             foreach ($event->getApplications() as $application) {
                 $attender = $application->getAttender();

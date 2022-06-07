@@ -42,7 +42,8 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('happening')
             ->add('attender.countryOfLiving')
             ->add('applicationStatus')
-            ->add('transportation')
+            ->add('attender.fieldOfWork')
+            ->add('attender.company')
             ->add('isPayed')
             ->add('createdAt')
             ->add('updatedAt')
@@ -57,7 +58,8 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('attender.countryOfLiving')
             ->add('attender')
             ->add('applicationStatus')
-            ->add('transportation')
+            ->add('attender.fieldOfWork')
+            ->add('attender.company')
             ->add('isPayed')
             ->add('createdAt')
             ->add('updatedAt')
@@ -83,18 +85,6 @@ final class ApplicationAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('happening', ModelListType::class)
-            /*
-            ->add('happening', ModelAutocompleteType::class, [
-                'property' => 'title',
-                'callback' => function ($admin, $property, $value) {
-                    $datagrid = $admin->getDatagrid();
-                    $queryBuilder = $datagrid->getQuery();
-                    $queryBuilder
-                        ->andWhere($queryBuilder->getRootAlias() . '.isRegistrationOpen=:barValue')
-                        ->setParameter('barValue', true);
-                    $datagrid->setValue($property, null, $value);
-                },
-            ])*/
             ->add('attender', ModelListType::class)
             ->add('dietaryRequirements')
             ->add('accommodation')
@@ -135,11 +125,12 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('attender')
             ->add('attender.phone')
             ->add('attender.email')
+            ->add('attender.fieldOfWork')
+            ->add('attender.company')
             ->add('dietaryRequirements')
             ->add('accommodation')
             ->add('accommodationComments')
             ->add('applicationStatus')
-            ->add('transportation')
             ->add('isPayed')
             ->add('createdAt')
             ->add('updatedAt')

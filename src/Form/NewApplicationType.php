@@ -23,6 +23,7 @@ class NewApplicationType extends AbstractType
                     'label' => 'Accommodation',
                     'placeholder' => 'Please select from the following list',
                     'choices' => [
+                        'Without accommodation' => 'Without accommodation',
                         'Single' => 'Single',
                         'Shared' => 'Shared',
                         'Couple' => 'Couple',

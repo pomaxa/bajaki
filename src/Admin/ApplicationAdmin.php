@@ -114,8 +114,7 @@ final class ApplicationAdmin extends AbstractAdmin
                 ]]
 
             )
-            ->end()
-        ;
+            ->end();
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void
@@ -136,5 +135,26 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('updatedAt')
             ->add('approvedAt')
             ->add('comments');
+    }
+
+    protected function configureExportFields(): array
+    {
+        return [
+            'id',
+            'attender',
+            'attender.phone',
+            'attender.email',
+            'attender.fieldOfWork',
+            'attender.company',
+            'dietaryRequirements',
+            'accommodation',
+            'accommodationComments',
+            'applicationStatus',
+            'isPayed',
+            'createdAt',
+            'updatedAt',
+            'approvedAt',
+            'comments',
+        ];
     }
 }

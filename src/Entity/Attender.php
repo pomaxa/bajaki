@@ -241,6 +241,28 @@ class Attender
         return $this->phone;
     }
 
+    public function getMainPhone()
+    {
+        $phone = $this->phone->first();
+
+        if($phone instanceof PhoneNumber) {
+            return $phone->getPhone();
+        }
+
+        return $phone;
+    }
+
+    public function getMainEmail()
+    {
+        $email = $this->phone->first();
+
+        if($email instanceof EmailAddress) {
+            return $email->getEmail();
+        }
+
+        return $email;
+    }
+
     public function setEmail($emails)
     {
         if($emails instanceof Collection) {

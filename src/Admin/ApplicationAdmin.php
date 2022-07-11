@@ -142,8 +142,9 @@ final class ApplicationAdmin extends AbstractAdmin
         return [
             'id',
             'attender',
-            'attender.phone',
-            'attender.email',
+            'attender.dateOfBirth',
+            'attender.getMainPhone',
+            'attender.getMainEmail',
             'attender.fieldOfWork',
             'attender.company',
             'dietaryRequirements',

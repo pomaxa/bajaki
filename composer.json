@@ -35,6 +35,7 @@
     "symfony/property-access": "^5.4.0",
     "symfony/property-info": "^5.4.0",
     "symfony/proxy-manager-bridge": "^5.4.0",
+    "symfony/rate-limiter": "^5.4.0",
     "symfony/security-bundle": "^5.4.0",
     "symfony/serializer": "^5.4.0",
     "symfony/swiftmailer-bundle": "^3.1",

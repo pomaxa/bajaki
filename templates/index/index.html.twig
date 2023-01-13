@@ -8,30 +8,58 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Baltic Jewish Network</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Baltic Jewish Network</h1>
+                <h3>Open for registration events:</h3>
+            </div>
+            <div class="col-md-auto">
+                [banner] <br>
 
-    <h3>Open for registration events:</h3>
+                {% if app.user and app.user.isAdmin() %}
+                    <a href="{{ path('sonata_admin_dashboard') }}" class="">dashboard</a>
+                {% endif %}
 
 
-    <div class="card-columns">
-        {% for h in events %}
 
-            <div class="card" style="width: 18rem;">
-                <img
-                        class="card-img-top"
-                        src="https://picsum.photos/200/100"
-                        alt="{{ h.title }}"
-                >
-                <div class="card-body">
-                    <h5 class="card-title">{{ h.title }}</h5>
-                    <p class="card-text">{{ h.description }}</p>
-
-                    <a href="{{ path('happening', {'id': h.id}) }}" class="btn btn-primary">Apply</a>
-                </div>
+            </div>
+            <div class="col col-lg-2">
+                {% if app.user %}
+                    <a href="{{ path('app_logout') }}">exit</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">login</a>
+                {% endif %}
             </div>
 
-        {% endfor %}
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col">
+
+                <div class="card-columns">
+                    {% for h in events %}
+
+                        <div class="card" style="width: 18rem;">
+                            <img
+                                    class="card-img-top"
+                                    src="https://picsum.photos/200/100"
+                                    alt="{{ h.title }}"
+                            >
+                            <div class="card-body">
+                                <h5 class="card-title">{{ h.title }}</h5>
+                                <p class="card-text">{{ h.description }}</p>
+
+                                <a href="{{ path('happening', {'id': h.id}) }}" class="btn btn-primary">Apply</a>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}

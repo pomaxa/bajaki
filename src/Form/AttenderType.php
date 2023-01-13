@@ -54,7 +54,7 @@ class AttenderType extends AbstractType
             ])
             ->add('countryOfLiving')
             ->add('dateOfBirth', BirthdayType::class)
-            ->add('facebookLink', null, ['label' => 'Facebook profile'])
+            ->add('facebookLink', null, ['label' => 'Link to social media'])
             ->add('languages', ChoiceType::class, ['multiple' =>true,
             'attr' => ['class'=>'selectpicker', 'multiple'],
             'choices' => [

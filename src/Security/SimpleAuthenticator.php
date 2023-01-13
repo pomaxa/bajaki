@@ -86,6 +86,10 @@ class SimpleAuthenticator extends AbstractFormLoginAuthenticator
         }
 
 
+        if(in_array('ROLE_ADMIN', $token->getUser()->getRoles())){
+            return new RedirectResponse($this->urlGenerator->generate('sonata_admin_dashboard'));
+        }
+
         return new RedirectResponse($this->urlGenerator->generate('index'));
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
 //        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);

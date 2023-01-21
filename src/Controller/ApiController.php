@@ -142,20 +142,21 @@ class ApiController extends AbstractController
             );
         }
 
+        $errorMessage = '';
+        foreach ($form->getErrors() as $error) {
+            $errorMessage .= $error->getMessage() . ' ' . PHP_EOL;
+        }
 
         $response = new JsonResponse(
             [
                 'metadata' => 'api_event_submit',
                 'code' => 2,
                 'data' => [
-                    'message' => '',
+                    'message' => $errorMessage,
                     'message_code' => 'some_error',
                 ]
             ]
         );
-        foreach ($form->getErrors() as $error) {
-            $response['data']['message'] .= $error->getMessage() . ' ' . PHP_EOL;
-        }
 
         return $response;
     }

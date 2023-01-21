@@ -13,6 +13,7 @@ class NewApplicationApiType extends NewApplicationType
         $resolver->setDefaults([
             'data_class' => Application::class,
             'csrf_protection' => false,
+            'allow_extra_fields' => true,
         ]);
     }
 }

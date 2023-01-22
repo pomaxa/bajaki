@@ -57,13 +57,17 @@ class AttenderType extends AbstractType
             ->add('facebookLink', null, ['label' => 'Link to social media'])
             ->add('languages', ChoiceType::class, ['multiple' =>true,
             'attr' => ['class'=>'selectpicker', 'multiple'],
+            'label' => 'What languages do you speak?',
             'choices' => [
                 'English' => 'English',
                 'Estonian' => 'Estonian',
                 'Latvian' => 'Latvian',
                 'Lithuanian' => 'Lithuanian',
                 'Russian' => 'Russian',
-                'Spanish' => 'Spanish',
+                'German' => 'German',
+                'Ukrainian' => 'Ukrainian',
+                'Polish' => 'Polish',
+                'Other' => 'Other',
             ]])
 
             ->add('jobTitle')

@@ -56,10 +56,10 @@ class NewApplicationType extends AbstractType
             ->add(
                 'wantToSupport', ChoiceType::class,
                 [
-                    'label' => 'Would you like to support BJN Weekends and promote your business?',
+                    'label' => 'Would you like to support BJN Weekend and promote your business?',
 //                    'placeholder' => 'Please select ',
                     'choices' => [
-                        'Yes, I would glad' => 'Yes, I would glad',
+                        'Yes, I would glad' => 'Yes, I would  be glad. We will get in contact with you with further details!',
                         'Not at the moment' => 'Not at the moment',
                     ],
                 ]

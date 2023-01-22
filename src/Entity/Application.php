@@ -6,78 +6,56 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ApplicationRepository")
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\ApplicationRepository')]
+#[ORM\HasLifecycleCallbacks]
 class Application
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Attender", inversedBy="applications", cascade={"persist"} )
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Attender', inversedBy: 'applications', cascade: ['persist'])]
     private $attender;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $dietaryRequirements;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $accommodation;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $accommodationComments;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $applicationStatus;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $transportation;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private $isPayed;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private $updatedAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private $approvedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Happening", inversedBy="applications")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Happening', inversedBy: 'applications')]
     private $happening;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ApplicationComments", mappedBy="application", cascade={"persist"})
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\ApplicationComments', mappedBy: 'application', cascade: ['persist'])]
     private $comments;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $dayOfArrival = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $wantToSupport = null;
 
     public const STATUS_NEW = 'new';
     public const STATUS_APPROVED = 'approved';
@@ -237,9 +215,7 @@ class Application
         return 'Application for '.$this->getHappening();
     }
 
-    /**
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PreUpdate]
     public function trackUpdateAt(): void
     {
         $this->setUpdatedAt(new \DateTime());
@@ -277,6 +253,30 @@ class Application
                 $comment->setApplication(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDayOfArrival(): ?string
+    {
+        return $this->dayOfArrival;
+    }
+
+    public function setDayOfArrival(?string $dayOfArrival): self
+    {
+        $this->dayOfArrival = $dayOfArrival;
+
+        return $this;
+    }
+
+    public function getWantToSupport(): ?string
+    {
+        return $this->wantToSupport;
+    }
+
+    public function setWantToSupport(?string $wantToSupport): self
+    {
+        $this->wantToSupport = $wantToSupport;
 
         return $this;
     }

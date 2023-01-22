@@ -6,66 +6,42 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\HappeningRepository")
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\HappeningRepository')]
 class Happening
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $updatedAt;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $startsAt;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $endsAt;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $description;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private $isRegistrationOpen;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private $isPaid;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Attender", mappedBy="email")
-     */
+    #[ORM\ManyToMany(targetEntity: 'App\Entity\Attender', mappedBy: 'email')]
     private $attenders;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="happening")
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\Application', mappedBy: 'happening')]
     private $applications;
 
     public function __construct()

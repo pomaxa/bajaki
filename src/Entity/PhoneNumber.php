@@ -6,36 +6,24 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\PhoneNumberRepository")
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\PhoneNumberRepository')]
 class PhoneNumber
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $phone;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $normalizedPhone;
 
-    /**
-     * @ORM\Column(type="string", length=80)
-     */
+    #[ORM\Column(type: 'string', length: 80)]
     private $hash;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Attender", mappedBy="phone")
-     */
+    #[ORM\ManyToMany(targetEntity: 'App\Entity\Attender', mappedBy: 'phone')]
     private $attenders;
 
     public function __construct()

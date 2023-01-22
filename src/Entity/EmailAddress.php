@@ -6,36 +6,24 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\EmailAddressRepository")
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\EmailAddressRepository')]
 class EmailAddress
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $emailCanonical;
 
-    /**
-     * @ORM\Column(type="string", length=80)
-     */
+    #[ORM\Column(type: 'string', length: 80)]
     private $hash;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Attender", mappedBy="email")
-     */
+    #[ORM\ManyToMany(targetEntity: 'App\Entity\Attender', mappedBy: 'email')]
     private $attenders;
 
     public function __construct()

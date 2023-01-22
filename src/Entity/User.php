@@ -9,40 +9,32 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
- * @ORM\Table(name="`user`")
  */
+#[ORM\Table(name: '`user`')]
+#[ORM\Entity(repositoryClass: 'App\Repository\UserRepository')]
 class User implements UserInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    #[ORM\Column(type: 'json')]
     private $roles = [
         'ROLE_ADMIN'
     ];
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     private $password;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ApplicationComments", mappedBy="createdBy")
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\ApplicationComments', mappedBy: 'createdBy')]
     private $applicationComments;
     private $plainPassword;
 

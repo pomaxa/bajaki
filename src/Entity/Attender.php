@@ -6,117 +6,73 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\AttenderRepository")
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\AttenderRepository')]
+#[ORM\HasLifecycleCallbacks]
 class Attender
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $firstName;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $lastName;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $middleNames;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\EmailAddress", inversedBy="attenders", cascade={"persist"})
-     */
+    #[ORM\ManyToMany(targetEntity: 'App\Entity\EmailAddress', inversedBy: 'attenders', cascade: ['persist'])]
     private $email;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\PhoneNumber", inversedBy="attenders", cascade={"persist"} )
-     */
+    #[ORM\ManyToMany(targetEntity: 'App\Entity\PhoneNumber', inversedBy: 'attenders', cascade: ['persist'])]
     private $phone;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $gender;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $countryOfLiving;
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
+    #[ORM\Column(type: 'date', nullable: true)]
     private $dateOfBirth;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $facebookLink;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProfileLinks", mappedBy="attender")
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\ProfileLinks', mappedBy: 'attender')]
     private $profileLinks;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\KnowFrom", inversedBy="attenders")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\KnowFrom', inversedBy: 'attenders')]
     private $knowFrom;
 
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
+    #[ORM\Column(type: 'array', nullable: true)]
     private $languages = [];
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\FieldOfWork", inversedBy="attenders")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\FieldOfWork', inversedBy: 'attenders')]
     private $fieldOfWork;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $jobTitle;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private $allowToShare;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="attender")
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\Application', mappedBy: 'attender')]
     private $applications;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\AttenderCompany", inversedBy="attenders", cascade={"persist"})
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\AttenderCompany', inversedBy: 'attenders', cascade: ['persist'])]
     private $company;
 
-    /**
-     * @ORM\Column(type="string", name="avatar_filename", nullable=true)
-     */
+    #[ORM\Column(type: 'string', name: 'avatar_filename', nullable: true)]
     private $avatarFilename;
 
     private $avatarFile;
@@ -495,9 +451,7 @@ class Attender
         return $this;
     }
 
-    /**
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PreUpdate]
     public function trackUpdateAt(): void
     {
         $this->setUpdatedAt(new \DateTime());

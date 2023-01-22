@@ -4,31 +4,21 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ProfileLinksRepository")
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\ProfileLinksRepository')]
 class ProfileLinks
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $title;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $url;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Attender", inversedBy="profileLinks")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Attender', inversedBy: 'profileLinks')]
     private $attender;
 
     public function getId(): ?int

@@ -4,36 +4,24 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ApplicationCommentsRepository")
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\ApplicationCommentsRepository')]
 class ApplicationComments
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $commentary;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="applicationComments")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\User', inversedBy: 'applicationComments')]
     private $createdBy;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="comments")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Application', inversedBy: 'comments')]
     private $application;
 
 

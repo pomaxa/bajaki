@@ -59,7 +59,7 @@ class NewApplicationType extends AbstractType
                     'label' => 'Would you like to support BJN Weekend and promote your business?',
 //                    'placeholder' => 'Please select ',
                     'choices' => [
-                        'Yes, I would glad' => 'Yes, I would  be glad. We will get in contact with you with further details!',
+                        'Yes, I would  be glad. We will get in contact with you with further details!' => 'Yes, I would  be glad. We will get in contact with you with further details!',
                         'Not at the moment' => 'Not at the moment',
                     ],
                 ]

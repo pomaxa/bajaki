@@ -46,7 +46,7 @@ class NewApplicationType extends AbstractType
                     'placeholder' => 'Please select from the following list',
                     'choices' => [
                         'Without accommodation' => 'Without accommodation',
-                        'Single' => 'Single',
+                        'Single' => 'Single (waiting list)',
                         'Shared' => 'Shared',
                         'Couple' => 'Couple',
                     ],

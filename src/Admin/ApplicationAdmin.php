@@ -154,6 +154,7 @@ final class ApplicationAdmin extends AbstractAdmin
             'accommodation',
             'accommodationComments',
             'applicationStatus',
+            'dayOfArrival',
             'isPayed',
             'createdAt',
             'updatedAt',

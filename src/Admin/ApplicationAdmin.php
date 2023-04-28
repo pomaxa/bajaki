@@ -45,6 +45,7 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('attender.fieldOfWork')
             ->add('attender.company')
             ->add('isPayed')
+            ->add('wantToSupport')
             ->add('dayOfArrival')
             ->add('createdAt')
             ->add('updatedAt')
@@ -62,6 +63,7 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('attender.fieldOfWork')
             ->add('attender.company')
             ->add('isPayed')
+            ->add('wantToSupport')
             ->add('dayOfArrival')
             ->add('createdAt')
             ->add('updatedAt')
@@ -132,6 +134,7 @@ final class ApplicationAdmin extends AbstractAdmin
             ->add('accommodation')
             ->add('accommodationComments')
             ->add('applicationStatus')
+            ->add('wantToSupport')
             ->add('isPayed')
             ->add('dayOfArrival')
             ->add('createdAt')
@@ -155,6 +158,7 @@ final class ApplicationAdmin extends AbstractAdmin
             'accommodationComments',
             'applicationStatus',
             'dayOfArrival',
+            'wantToSupport',
             'isPayed',
             'createdAt',
             'updatedAt',
